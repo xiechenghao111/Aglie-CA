@@ -1,15 +1,15 @@
-let persons; // List of movies from TMDB
-let people; //
+let persons; 
+let people; 
 
 describe("Base tests", () => {
   before(() => {
-    // Get the discover movies from TMDB and store them locally.
+  
     cy.request(
       `https://api.themoviedb.org/3/person/popular?api_key=${Cypress.env(
         "TMDB_KEY"
       )}&language=en-US&page=1`
     )
-      .its("body") // Take the body of HTTP response from TMDB
+      .its("body") 
       .then((response) => {
         persons = response.results;
       });
