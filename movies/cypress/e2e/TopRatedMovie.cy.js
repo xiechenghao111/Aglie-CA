@@ -8,7 +8,7 @@ describe("TopRatedMovieBase test", () => {
     cy.request(
       `https://api.themoviedb.org/3/movie/top_rated?api_key=${Cypress.env(
         "TMDB_KEY"
-      )}&language=en-US&include_adult=false&include_video=false&page=1`
+      )}&language=en-US&page=1`
     )
       .its("body") 
       .then((response) => {
