@@ -4,6 +4,10 @@ image: node:latest
 stages:
   - install
   - build
+<<<<<<< HEAD
+ 
+  
+=======
   - test
 
 variables:
@@ -19,6 +23,7 @@ cache:
       - movies/cache/Cypress
       - movies/node_modules
 
+>>>>>>> develop
 # Jobs 
 install_dependencies:
   stage: install
@@ -39,10 +44,28 @@ bundle_app:
     paths:
       - movies/build/
 
-e2etest:
+#e2etest:
+# Node docker image with Cypress and Chrome pre-installed
+#  image: cypress/browsers:node12.14.1-chrome85-ff81
+#  stage: test
+#  script:
+#    - cd movies
+#    - echo "Run tests in headless mode"
+#    - npm run start:ci
 
-  image: cypress/browsers:node12.14.1-chrome85-ff81
+build_jobX:
+  stage: build
+  only:
+    - develop
+  script:
+    - cd movies
+    - echo "build job X on demoBranch works"
+
+test_jobX:
   stage: test
+  only:
+    - main
+    - branchX
   script:
     - cd movies
     - echo "Run tests in headless mode"
