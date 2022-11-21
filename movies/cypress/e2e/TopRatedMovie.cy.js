@@ -36,7 +36,7 @@ describe("TopRatedMovieBase test", () => {
      it("should only display movies with m in the title", () => {
        let searchString = "m";
        let matchingMovies = filterByTitle(movies, searchString);
-       cy.get("#filled-search").clear().type(searchString); // Enter m in text box
+       cy.get("#filled-search").clear().type(searchString); 
        cy.get(".MuiCardHeader-content").should(
          "have.length",
          matchingMovies.length
@@ -48,7 +48,7 @@ describe("TopRatedMovieBase test", () => {
      it("should only display movies with o in the title", () => {
        let searchString = "o";
        let matchingMovies = filterByTitle(movies, searchString);
-       cy.get("#filled-search").clear().type(searchString); // Enter m in text box
+       cy.get("#filled-search").clear().type(searchString); 
        cy.get(".MuiCardHeader-content").should(
          "have.length",
          matchingMovies.length
