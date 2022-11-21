@@ -56,4 +56,13 @@ build_jobX:
     - cd movies
     - echo "build job X on demoBranch works"
 
+test_jobX:
+  stage: test
+  only:
+    - main
+    - branchX
+  script:
+    - cd movies
+    - echo "Run test job X"
+
    
