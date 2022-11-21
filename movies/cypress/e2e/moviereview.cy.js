@@ -1,15 +1,15 @@
 let review;
-let movies; // List of movies from TMDB
+let movies; 
 
 describe("Base tests", () => {
   before(() => {
-    // Get the discover movies from TMDB and store them locally.
+
     cy.request(
       `https://api.themoviedb.org/3/discover/movie?api_key=${Cypress.env(
         "TMDB_KEY"
       )}&language=en-US&include_adult=false&include_video=false&page=1`
     )
-      .its("body") // Take the body of HTTP response from TMDB
+      .its("body") 
       .then((response) => {
         movies = response.results;
       
@@ -38,7 +38,7 @@ describe("moviereview tests", () => {
     cy.request(
       `https://api.themoviedb.org/3/movie/${ movies[0].id}/reviews?api_key=${Cypress.env("TMDB_KEY")}`
     )
-      .its("body") // Take the body of HTTP response from TMDB
+      .its("body") 
       .then((response) => {
         movies = response.results;
       });
@@ -65,7 +65,7 @@ describe("moviereview tests", () => {
       cy.request(
         `https://api.themoviedb.org/3/movie/${ movies[0].id}/reviews?api_key=${Cypress.env("TMDB_KEY")}`
       )
-        .its("body") // Take the body of HTTP response from TMDB
+        .its("body") 
         .then((response) => {
           review = response.results;
         });
@@ -80,7 +80,6 @@ describe("moviereview tests", () => {
     cy.get(".MuiTableHead-root tr th").eq(0).contains("Author");
     cy.get(".MuiTableHead-root tr th").eq(1).contains("Excerpt");
     cy.get(".MuiTableHead-root tr th").eq(2).contains("More");
-    
     cy.get(".MuiTableRow-root  td").eq(1).contains("Full Review");
    
   });
