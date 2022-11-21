@@ -1,9 +1,8 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Navigate, Routes } from "react-router-dom";
 import HomePage from "./pages/homePage";
-import MoviePage from "./pages/movieDetailsPage";
 import FavoriteMoviesPage from "./pages/favoriteMoviesPage";
 import UpcomingPage from "./pages/upcomingPage";
 import TopratedPage from "./pages/topratedPage"
@@ -19,7 +18,7 @@ import TVPage from "./pages/TVPage";
 import TVDetailPage from "./pages/TVDetailPage";
 import LoginPage from "./pages/loginPage";
 import {Auth0Provider} from '@auth0/auth0-react';
-
+const MoviePage = lazy(() => import("./pages/movieDetailsPage"));
 const domain = "dev-emaoq2008zqrl4p3.uk.auth0.com";
 const clientId = "232E8LCYVa6I2V4TBf7mR0lHnx9W2nUq";
 const queryClient = new QueryClient({
@@ -38,6 +37,7 @@ const App = () => {
     <BrowserRouter>
     <SiteHeader />
     <MoviesContextProvider>
+    <Suspense fallback={<h1>Loading page</h1>}>
     <Routes>
     <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
       <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
@@ -54,6 +54,7 @@ const App = () => {
       <Route path="*" element={ <Navigate to="/1" /> } />
 
     </Routes>
+    </Suspense>
     </MoviesContextProvider>
   </BrowserRouter>
   <ReactQueryDevtools initialIsOpen={false} />
