@@ -4,21 +4,8 @@ image: node:latest
 stages:
   - install
   - build
-  - test
-
-variables:
-   npm_config_cache: "$CI_PROJECT_DIR/movies/.npm"
-   CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/movies/cache/Cypress"
-
-cache:
-   key:
-     files:
-      - movies/package.json
-   paths:
-      - movies/.npm
-      - movies/cache/Cypress
-      - movies/node_modules
-
+ 
+  
 # Jobs 
 install_dependencies:
   stage: install
@@ -40,6 +27,7 @@ bundle_app:
       - movies/build/
 
 e2etest:
+# Node docker image with Cypress and Chrome pre-installed
   image: cypress/browsers:node12.14.1-chrome85-ff81
   stage: test
   script:
