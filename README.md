@@ -39,6 +39,7 @@ This repository contains the implementation of a React App and its associated Cy
 ## Code Splitting.
 
 + src/index.js
+(./image/Code Splitting.png)
 
 ## Pull Requests.
 
@@ -47,4 +48,6 @@ https://github.com/xiechenghao111/Aglie-CA/pulls?q=is%3Apr+is%3Aclosed
 ## Independent learning (If relevant).
 
 I use the continuous integration of the auto-deployment. Use GitHub Pages, and you can see my web in the path "https://xiechenghao111.github.io/Aglie-CA"
+
+(./image/auto-deployment.png)
 
