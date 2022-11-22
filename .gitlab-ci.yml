@@ -4,10 +4,7 @@ image: node:latest
 stages:
   - install
   - build
-<<<<<<< HEAD
- 
-  
-=======
+
   - test
 
 variables:
@@ -23,7 +20,7 @@ cache:
       - movies/cache/Cypress
       - movies/node_modules
 
->>>>>>> develop
+
 # Jobs 
 install_dependencies:
   stage: install
