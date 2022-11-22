@@ -1,6 +1,5 @@
 {
   "name": "movies",
-  "homepage": "https://xiechenghao111.github.io/Aglie-CA",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,8 +21,6 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start:ci": "start-server-and-test 'http-server ./build  -p 3000 -P http://localhost:3000?' 3000 'cypress run --browser chrome '",
     "start": "react-scripts start",
     "build": "react-scripts build",
