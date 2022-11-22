@@ -42,7 +42,7 @@ This repository contains the implementation of a React App and its associated Cy
 
 ## Pull Requests.
 
-[ Specify the URL of the GitHub repository that contains a record of Pull Requests for the React App.]
+https://github.com/xiechenghao111/Aglie-CA/pulls?q=is%3Apr+is%3Aclosed
 
 ## Independent learning (If relevant).
 
