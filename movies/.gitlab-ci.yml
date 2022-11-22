@@ -58,6 +58,8 @@ build_jobX:
 
 test_jobX:
   stage: test
+  only:
+    - main
   script:
     - cd movies
     - echo "Run tests in headless mode"
