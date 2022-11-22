@@ -52,11 +52,7 @@ describe("moviereview tests", () => {
      
       cy.get(".MuiGrid-grid-xs-9>button").contains("Reviews");
      
-    });
-
-    
-
-    
+    });  
     
   });
   describe("moviereview content tests", () => {
