@@ -7,17 +7,17 @@ stages:
   - test
 
 variables:
-   npm_config_cache: "$CI_PROJECT_DIR/movies/.npm"
-   CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/movies/cache/Cypress"
+  npm_config_cache: "$CI_PROJECT_DIR/movies/.npm"
+  CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/movies/cache/Cypress"
 
 cache:
-   key:
-     files:
+  key:
+    files:
       - movies/package.json
-   paths:
-      - movies/.npm
-      - movies/cache/Cypress
-      - movies/node_modules
+  paths:
+    - movies/.npm
+    - movies/cache/Cypress
+    - movies/node_modules
 
 # Jobs 
 install_dependencies:
