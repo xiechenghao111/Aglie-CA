@@ -1,6 +1,6 @@
 let movies;
-let movieId; // Enola Holmes movie id
-
+let movieId; 
+let movies_page;
 describe("Navigation", () => {
   before(() => {
     cy.request(
@@ -15,6 +15,12 @@ describe("Navigation", () => {
   });
   beforeEach(() => {
     cy.visit("/");
+  });
+  describe("From the home page to a movie's details", () => {
+    it("navigates to the movie details page and change browser URL", () => {
+      cy.clickLink('More Info ...');  //Cypress Custom commands Click link containing text
+      cy.url().should("include", `/movies/${movies[0].id}`);
+    });
   });
   
   describe("The site header", () => {
@@ -66,7 +72,7 @@ describe("Navigation", () => {
   
 
 describe("From the top rated page", () => {
-    it("should navigate to the movie details page and change browser URL", () => {
+    it("should navigate to the top rated movie details page and change browser URL", () => {
       cy.get("header").find(".MuiToolbar-root").find("button").eq(4).click({force: true});
       cy.url().should("include", `/movies/toprated`);
       cy.get("h3").contains("Toprated Movies");
@@ -102,5 +108,39 @@ describe("From the Login page", () => {
      
     });
 });
+describe("From the upcoming page", () => {
+  it("should navigate to the upcoming movie details page and change browser URL", () => {
+    cy.get("header").find(".MuiToolbar-root").find("button").eq(3).click({force: true});
+    cy.url().should("include", `/movies/upcoming`);
+    cy.get("h3").contains("Upcoming Movies");
+   
+  });
+});
+describe("Pagination", () => {
+  before(() => {
+    // Get the discover movies from TMDB and store them locally.
+    cy.request(
+      `https://api.themoviedb.org/3/discover/movie?api_key=${Cypress.env(
+        "TMDB_KEY"
+      )}&language=en-US&include_adult=false&include_video=false&page=2`
+    )
+      .its("body") // Take the body of HTTP response from TMDB
+      .then((response) => {
+          movies_page = response.results
+        })
+  
+  });
+  beforeEach(() => {
+    cy.visit("/movies");
+  });
 
+  it("should display certain page of movies after clicking according page button", () => {
+      Cypress.on('uncaught:exception', () => false)
+      cy.get(".MuiPagination-ul").find("li").eq(3).click();
+      cy.get(".MuiCardHeader-content").each(($card, index) => {
+          cy.wrap($card).find("p").contains(movies_page[index].title);
+        });
+    });
+
+  });
 });
