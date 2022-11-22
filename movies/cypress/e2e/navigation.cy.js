@@ -118,13 +118,14 @@ describe("From the upcoming page", () => {
 });
 describe("Pagination", () => {
   before(() => {
-   
+    
     cy.request(
       `https://api.themoviedb.org/3/discover/movie?api_key=${Cypress.env(
         "TMDB_KEY"
       )}&language=en-US&include_adult=false&include_video=false&page=2`
     )
       .its("body") 
+      .then((response) => {
           movies_page = response.results
         })
   
@@ -132,7 +133,7 @@ describe("Pagination", () => {
   beforeEach(() => {
     cy.visit("/movies");
   });
-
+  
   it("should display certain page of movies after clicking according page button", () => {
       Cypress.on('uncaught:exception', () => false)
       cy.get(".MuiPagination-ul").find("li").eq(3).click();
@@ -140,6 +141,10 @@ describe("Pagination", () => {
           cy.wrap($card).find("p").contains(movies_page[index].title);
         });
     });
+   
+    });
+ 
 
-  });
+
+
 });
