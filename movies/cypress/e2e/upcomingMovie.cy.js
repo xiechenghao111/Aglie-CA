@@ -1,5 +1,6 @@
 let movies;    
 let movie;
+let review;
 const filterByTitle = (movieList, string) =>
   movieList.filter((m) => m.title.toLowerCase().search(string) !== -1);
 
@@ -123,6 +124,43 @@ describe("Upcoming Page ", () => {
               });
             });
   });
+  describe("moviereview content tests", () => {
+    before(() => {
+     
+      cy.request(
+        `https://api.themoviedb.org/3/movie/${
+          movies[0].id
+        }?api_key=${Cypress.env("TMDB_KEY")}`
+      )
+        .its("body") 
+        .then((response) => {
+          review = response.results;
+        });
+    });
+    beforeEach(() => {
+      cy.visit(`/movies/238`);
+    });
+
+    describe("The Review ", () => {
+      it("displays review button", () => {
+       
+        cy.get(".MuiGrid-grid-xs-9>button").contains("Reviews");
+       
+      });  
+      
+    });
+  it("displays review page", () => {
+
+   cy.get(".MuiGrid-grid-xs-9>button").click();
+
+    cy.get(".MuiTableHead-root tr th").eq(0).contains("Author");
+    cy.get(".MuiTableHead-root tr th").eq(1).contains("Excerpt");
+    cy.get(".MuiTableHead-root tr th").eq(2).contains("More");
+    cy.get(".MuiTableRow-root  td").eq(1).contains("Full Review");
+   
+  });
+  
+}); 
   
      });
     });
