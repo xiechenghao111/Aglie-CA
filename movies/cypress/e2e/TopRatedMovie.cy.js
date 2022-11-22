@@ -1,5 +1,6 @@
 let movies; 
 let movie; 
+let review;
 const filterByTitle = (movieList, string) =>
   movieList.filter((m) => m.title.toLowerCase().search(string) !== -1);
 describe("TopRatedMovieBase test", () => {
@@ -36,7 +37,7 @@ describe("TopRatedMovieBase test", () => {
      it("should only display movies with m in the title", () => {
        let searchString = "m";
        let matchingMovies = filterByTitle(movies, searchString);
-       cy.get("#filled-search").clear().type(searchString); // Enter m in text box
+       cy.get("#filled-search").clear().type(searchString); 
        cy.get(".MuiCardHeader-content").should(
          "have.length",
          matchingMovies.length
@@ -48,7 +49,7 @@ describe("TopRatedMovieBase test", () => {
      it("should only display movies with o in the title", () => {
        let searchString = "o";
        let matchingMovies = filterByTitle(movies, searchString);
-       cy.get("#filled-search").clear().type(searchString); // Enter m in text box
+       cy.get("#filled-search").clear().type(searchString); 
        cy.get(".MuiCardHeader-content").should(
          "have.length",
          matchingMovies.length
@@ -90,6 +91,45 @@ describe("TopRatedMovieBase test", () => {
           });
         });
     });
+    
   });
+ 
+  describe("moviereview content tests", () => {
+    before(() => {
+     
+      cy.request(
+        `https://api.themoviedb.org/3/movie/${
+          movies[0].id
+        }?api_key=${Cypress.env("TMDB_KEY")}`
+      )
+        .its("body") 
+        .then((response) => {
+          review = response.results;
+        });
+    });
+    beforeEach(() => {
+      cy.visit(`/movies/238`);
+    });
+
+    describe("The Review ", () => {
+      it("displays review button", () => {
+       
+        cy.get(".MuiGrid-grid-xs-9>button").contains("Reviews");
+       
+      });  
+      
+    });
+  it("displays review page", () => {
+
+   cy.get(".MuiGrid-grid-xs-9>button").click();
+
+    cy.get(".MuiTableHead-root tr th").eq(0).contains("Author");
+    cy.get(".MuiTableHead-root tr th").eq(1).contains("Excerpt");
+    cy.get(".MuiTableHead-root tr th").eq(2).contains("More");
+    cy.get(".MuiTableRow-root  td").eq(1).contains("Full Review");
+   
+  });
+}); 
+
 });
 });
