@@ -50,20 +50,5 @@ e2etest:
     - echo "Run tests in headless mode"
     - npm run start:ci
 
-build_jobX:
-  stage: build
-  only:
-    - develop
-  script:
-    - cd movies
-    - echo "build job X on demoBranch works"
 
-test_jobX:
-  stage: test
-  only:
-    - main
-  script:
-    - cd movies
-    - echo "Run tests in headless mode"
-    - npm run start:ci
    
