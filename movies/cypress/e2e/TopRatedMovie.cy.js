@@ -129,7 +129,46 @@ describe("TopRatedMovieBase test", () => {
     cy.get(".MuiTableRow-root  td").eq(1).contains("Full Review");
    
   });
+  
 }); 
 
+describe("moviereview Error/Exception testing tests", () => {
+  before(() => {
+   
+    cy.request(
+      `https://api.themoviedb.org/3/movie/${
+        movies[0].id
+      }?api_key=${Cypress.env("TMDB_KEY")}`
+    )
+      .its("body") 
+      .then((response) => {
+        review = response.results;
+      });
+  });
+  beforeEach(() => {
+    cy.visit(`/movies/851644
+    }`);
+  });
+
+  describe("The Review ", () => {
+    it("displays review button", () => {
+     
+      cy.get(".MuiGrid-grid-xs-9>button").contains("Reviews");
+     
+    });  
+    
+  });
+it("displays only the header of review page", () => { //Error/Exception testing some moviews do not have the content of the review, only header
+
+ cy.get(".MuiGrid-grid-xs-9>button").click();
+
+  cy.get(".MuiTableHead-root tr th").eq(0).contains("Author");
+  cy.get(".MuiTableHead-root tr th").eq(1).contains("Excerpt");
+  cy.get(".MuiTableHead-root tr th").eq(2).contains("More");
+ 
+ 
+});
+
+}); 
 });
 });
