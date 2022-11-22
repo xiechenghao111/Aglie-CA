@@ -118,14 +118,13 @@ describe("From the upcoming page", () => {
 });
 describe("Pagination", () => {
   before(() => {
-    // Get the discover movies from TMDB and store them locally.
+   
     cy.request(
       `https://api.themoviedb.org/3/discover/movie?api_key=${Cypress.env(
         "TMDB_KEY"
       )}&language=en-US&include_adult=false&include_video=false&page=2`
     )
-      .its("body") // Take the body of HTTP response from TMDB
-      .then((response) => {
+      .its("body") 
           movies_page = response.results
         })
   
